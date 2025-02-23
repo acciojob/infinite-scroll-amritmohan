@@ -1,10 +1,15 @@
 //your code here!
 
-document.addEventListener("DOMContentLoaded", () => {
-    let containerList = document.getElementById("infi-list");
+document.addEventListener("DOMContentLoaded", function () {
+    const listContainer = document.getElementById("infi-list");
+
+    if (!listContainer) {
+        console.error("Element with id 'infi-list' not found.");
+        return;
+    }
 
     function createListItem(index) {
-        let listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.textContent = `Item ${index}`;
         return listItem;
     }
@@ -16,20 +21,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addMoreItems() {
-        const currentItems = containerList.children.length;
+        const currentItems = listContainer.children.length;
         for (let i = 1; i <= 2; i++) {
-            containerList.appendChild(createListItem(currentItems + i));
+            listContainer.appendChild(createListItem(currentItems + i));
         }
     }
 
     function handleScroll() {
-        if (containerList.scrollTop + containerList.clientHeight >= containerList.scrollHeight - 10) {
+        if (listContainer.scrollTop + listContainer.clientHeight >= listContainer.scrollHeight - 10) {
             addMoreItems();
         }
     }
 
-    containerList.addEventListener("scroll", handleScroll);
+    listContainer.addEventListener("scroll", handleScroll);
 
     loadInitialItems();
 });
-
